@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-signin-client_id" content="8157699356-icldo25saa6q9jc695cocs3avb7nobii.apps.googleusercontent.com">
+  <title>VFS Global</title>
+  <link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABmJLR0T///////8JWPfcAAAACXBIWXMAAABIAAAASABGyWs+AAAAF0lEQVRIx2NgGAWjYBSMglEwCkbBSAcACBAAAeaR9cIAAAAASUVORK5CYII="
+    rel="icon" type="image/x-icon" />
+  <link rel="stylesheet" href="style/bootstrap.min.css">
+
+  <!--Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Propeller css -->
+  <link href="style/propeller.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="style/style.css">
+</head>
+
+<body>
+
+  <script data-main="js/require-setup" src="require.js" onload="requirejs(['src/app']);"></script>
+  <script>
+    requirejs(['lib/jquery.min'], function ($) {
+      requirejs(['lib/bootstrap.min', 'lib/propeller'], function () {
+      });
+    });
+  </script>
+
+
+  <div class="container-fluid main-container">
+
+    <div class="row">
+      <div class="pmd-card pmd-z-depth card-custom-view" style="margin-bottom: 4px;">
+        <div class="pmd-card-body">
+          <div class="table custom-size">
+            <div class="media">
+              <div class="media-body">
+                <h1>VFS Global</h1>
+              </div>
+              <div class="media-right media-middle">
+                <button id="btnMinimize" class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button">
+                        <i class="material-icons pmd-sm">remove</i>
+                      </button>
+              </div>
+              <div class="media-right media-middle">
+                <button id="btnClose" class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button">
+                        <i class="material-icons pmd-sm">close</i>
+                      </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="chat-body pmd-z-depth">
+
+        <h1 class="pmd-display3 hidden">Say Hi :)</h1>
+        <ul id="msg_container" class="list-group pmd-list pmd-card-list hidden"></ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+
+        <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button">
+                  <i class="material-icons pmd-sm">face</i>
+                </button>
+        <button onclick="$(this).parent().find('input[type=file]').click();" class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary"
+          type="button">
+                  <i class="material-icons pmd-sm">attach_file</i>
+                </button>
+        <button class="btn btn-sm pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-primary" type="button">
+                  <i class="material-icons pmd-sm">mic</i>
+                </button>
+        <input onchange="alert('your webhook ajax here');" type="file" class="hidden" name="attachment" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-10">
+        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+          <label class="control-label">Write your message here...</label>
+          <textarea id="btn-input" required class="form-control"></textarea>
+        </div>
+      </div>
+
+      <div class="col-xs-2">
+        <div class="menu pmd-floating-action" role="navigation">
+          <a id="btn-send-message" class="pmd-floating-action-btn btn btn-sm pmd-btn-fab pmd-btn-raised pmd-ripple-effect btn-primary"
+            href="javascript:void(0);">
+                    <span class="pmd-floating-hidden">Primary</span>
+                    <i class="material-icons pmd-sm">send</i>
+                  </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
+<script>
+  function onSuccess(googleUser) {
+    var profileHTML = ` <div class="col-xs-15">
+        <h3 class="list-group-item-heading"> Welcome ${googleUser.getBasicProfile().getName()}</h3>
+        </div>`
+        
+    $('.userContent').html(profileHTML);
+
+    console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+  }
+  function onFailure(error) {
+    console.log(error);
+  }
+  function renderButton() {
+   
+    gapi.signin2.render('my-signin3', {
+      'scope': 'profile email',
+      'width': 210,
+
+      'longtitle': true,
+      'theme': 'dark',
+      'onsuccess': onSuccess,
+      'onfailure': onFailure
+    });
+
+  }
+
+</script>
+
+
+
+<script>
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      var signoutHTML = ` <div class="col-xs-15">
+            <h3 class="list-group-item-heading"> Successfully logged out</h3>
+        </div>`
+      $('.signoutuserContent').html(signoutHTML);
+
+      console.log('User signed out.');
+    });
+  }
+
+</script>
+
+
+
+
+</html>

@@ -1,0 +1,259 @@
+<html>
+    
+    <head>
+      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+      <style>
+        .loading {
+          width: 100px;
+          height: 100px;
+          margin: 30px auto;
+          position: relative;
+        }
+    
+        .bar div {
+          width: 10px;
+          height: 30px;
+          border-radius: 2px;
+          background: #033333;
+          position: absolute;
+          top: 35px;
+          left: 45px;
+          -webkit-animation: fadeit 0.4s ease infinite;
+          animation: fadeit 0.4s ease infinite;
+        }
+    
+        .bar div:nth-child(1) {
+          opacity: 1;
+          -webkit-transform: rotate(0deg) translate(0, -30px);
+          transform: rotate(0deg) translate(0, -30px);
+          -webkit-animation-delay: 0.1s;
+          animation-delay: 0.1s;
+        }
+    
+        .bar div:nth-child(2) {
+          opacity: 0.66;
+          -webkit-transform: rotate(30deg) translate(0, -30px);
+          transform: rotate(30deg) translate(0, -30px);
+          -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2;
+        }
+    
+        .bar div:nth-child(3) {
+          opacity: 0.33;
+          -webkit-transform: rotate(60deg) translate(0, -30px);
+          transform: rotate(60deg) translate(0, -30px);
+          -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s;
+        }
+    
+        .bar div:nth-child(4) {
+          opacity: 0;
+          -webkit-transform: rotate(90deg) translate(0, -30px);
+          transform: rotate(90deg) translate(0, -30px);
+          -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
+        }
+    
+        .bar div:nth-child(5) {
+          opacity: 1;
+          -webkit-transform: rotate(120deg) translate(0, -30px);
+          transform: rotate(120deg) translate(0, -30px);
+          -webkit-animation-delay: 0.1s;
+          animation-delay: 0.1s;
+        }
+    
+        .bar div:nth-child(6) {
+          opacity: 0.66;
+          -webkit-transform: rotate(150deg) translate(0, -30px);
+          transform: rotate(150deg) translate(0, -30px);
+          -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+        }
+    
+        .bar div:nth-child(7) {
+          opacity: 0.33;
+          -webkit-transform: rotate(180deg) translate(0, -30px);
+          transform: rotate(180deg) translate(0, -30px);
+          -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s;
+        }
+    
+        .bar div:nth-child(8) {
+          opacity: 0;
+          -webkit-transform: rotate(210deg) translate(0, -30px);
+          transform: rotate(210deg) translate(0, -30px);
+          -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
+        }
+    
+        .bar div:nth-child(9) {
+          opacity: 1;
+          -webkit-transform: rotate(240deg) translate(0, -30px);
+          transform: rotate(240deg) translate(0, -30px);
+          -webkit-animation-delay: 0.1s;
+          animation-delay: 0.1s;
+        }
+    
+        .bar div:nth-child(10) {
+          opacity: 0.66;
+          -webkit-transform: rotate(270deg) translate(0, -30px);
+          transform: rotate(270deg) translate(0, -30px);
+          -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s;
+        }
+    
+        .bar div:nth-child(11) {
+          opacity: 0.33;
+          -webkit-transform: rotate(300deg) translate(0, -30px);
+          transform: rotate(300deg) translate(0, -30px);
+          -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s;
+        }
+    
+        .bar div:nth-child(12) {
+          opacity: 0;
+          -webkit-transform: rotate(330deg) translate(0, -30px);
+          transform: rotate(330deg) translate(0, -30px);
+          -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s;
+        }
+    
+        @-webkit-keyframes fadeit {
+          1% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 0;
+          }
+        }
+    
+        @keyframes fadeit {
+          1% {
+            opacity: 1;
+          }
+          100% {
+            opacity: 0;
+          }
+        }
+      </style>
+      <script src="https://apis.google.com/js/api:client.js"></script>
+      <script>
+        var googleUser = {};
+        var startApp = function () {
+          gapi.load('auth2', function () {
+            // Retrieve the singleton for the GoogleAuth library and set up the client.
+            auth2 = gapi.auth2.init({
+              client_id: '8157699356-icldo25saa6q9jc695cocs3avb7nobii.apps.googleusercontent.com',
+              cookiepolicy: 'single_host_origin',
+              // Request scopes in addition to 'profile' and 'email'
+              //scope: 'additional_scope'
+            });
+            attachSignin(document.getElementById('customBtn'));
+          });
+        };
+    
+        function attachSignin(element) {
+          console.log(element.id);
+          auth2.attachClickHandler(element, {},
+            function (googleUser) {
+              document.getElementById('name').innerText = "Signed in: " +
+                googleUser.getBasicProfile().getName();
+            }, function (error) {
+              alert(JSON.stringify(error, undefined, 2));
+            });
+        }
+      </script>
+      <style type="text/css">
+        #customBtn {
+          display: inline-block;
+          background: white;
+          color: #444;
+          width: 190px;
+          border-radius: 5px;
+          border: thin solid #888;
+          box-shadow: 1px 1px 1px grey;
+          white-space: nowrap;
+        }
+    
+        #customBtn:hover {
+          cursor: pointer;
+        }
+    
+        span.label {
+          font-family: serif;
+          font-weight: normal;
+        }
+    
+        span.icon {
+          background: url('/identity/sign-in/g-normal.png') transparent 5px 50% no-repeat;
+          display: inline-block;
+          vertical-align: middle;
+          width: 42px;
+          height: 42px;
+        }
+    
+        span.buttonText {
+          display: inline-block;
+          vertical-align: middle;
+          padding-left: 42px;
+          padding-right: 42px;
+          font-size: 14px;
+          font-weight: bold;
+          /* Use the Roboto font that is loaded in the <head> */
+          font-family: 'Roboto', sans-serif;
+        }
+      </style>
+    </head>
+    
+    <body>
+      <!-- In the callback, you would hide the gSignInWrapper element on a
+          successful sign in -->
+      <!-- <div class="loading bar">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div> -->
+      <div id="gSignInWrapper">
+        <div id="customBtn" class="customGPlusSignIn">
+          <span class="icon"></span>
+          <span class="buttonText">Google</span>
+        </div>
+      </div>
+      <div id="name"></div>
+      <script>
+        startApp();
+      </script>
+    </body>
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <script>
+      $(function(){
+        setTimeout(()=>{
+          document.getElementById("customBtn").click();
+        })
+       
+      })
+      
+      
+    
+    </script>
+    
+    <a href="#" onclick="signOut();">Sign out</a>
+    <script>
+      function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+        });
+      }
+    </script>
+    
+    </html>
